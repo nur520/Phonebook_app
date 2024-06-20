@@ -1,4 +1,4 @@
-from flask_sqlalchemy import SQLALchemy
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import uuid
 from datetime import datetime
@@ -9,23 +9,23 @@ from flask_marshmallow import Marshmallow
 import secrets
 
 # set variables for class instantiation
-login_maager = LoginManager()
+login_manager = LoginManager()
 ma = Marshmallow()
-db = SQLALchemy()
+db = SQLAlchemy()
 
-@login_maager.user_loader
+@login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 class User(db.Model,UserMixin):
-    id = db.Colum(db.String, primay_key = True)
-    first_name =db.Colum(db.String(150),nullable = True,default = '')
-    last_name = db.Colum(db.String(150),nullable = True,default = '')
-    email = db.Colum(db.String(150),nullable = False)
-    password = db.Colum(db.String, nullable = True,default = '')
-    g_auth_verify = db.Colum(db.Boolean, default = False)
-    token = db.Colum(db.String, default = '', unique = True)
-    date_created = db.Colum(db.DateTime, nullable = False, default = datetime.utcnow)
+    id = db.Column(db.String, primary_key = True)
+    first_name =db.Column(db.String(150),nullable = True,default = '')
+    last_name = db.Column(db.String(150),nullable = True,default = '')
+    email = db.Column(db.String(150),nullable = False)
+    password = db.Column(db.String, nullable = True,default = '')
+    g_auth_verify = db.Column(db.Boolean, default = False)
+    token = db.Column(db.String, default = '', unique = True)
+    date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
 
     def __init__(self, email, first_name = '', last_name = '',password = '',token = '', g_auth_verify = False):
         self.id = self.set_id()
@@ -51,12 +51,12 @@ class User(db.Model,UserMixin):
         return f'User{self.emal} has been added to the database'
     
 class Contact(db.Model):
-    id = db.Colum(db.String, primary_key = True)
-    name = db.Colum(db.String(150), nullable = False)
-    email = db.Colum(db.String(200))
-    phone_number = db.Colum(db.String(20))
-    address = db.Colum(db.String(200))
-    user_token = db.Colum(db.String, db.ForeignKey('user.token'), nullable = False)
+    id = db.Column(db.String, primary_key = True)
+    name = db.Column(db.String(150), nullable = False)
+    email = db.Column(db.String(200))
+    phone_number = db.Column(db.String(20))
+    address = db.Column(db.String(200))
+    user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
 
 
     def __init__(self, name, address, email,phone_number, user_token,id = ''):

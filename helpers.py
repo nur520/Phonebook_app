@@ -30,9 +30,9 @@ def token_required(our_flask_function):
         return our_flask_function(current_user_token, *args, **kwargs)
     return decorated
 
-class JSONencoder(json.JSONEncoder):
+class JSONEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, decimal.Decimal):
             return str(obj)
-        return super(JSONencoder, self).default(obj)
+        return super(JSONEncoder, self).default(obj)
     
