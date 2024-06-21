@@ -48,7 +48,7 @@ class User(db.Model,UserMixin):
         return self.pw_hash
     
     def __repr__(self):
-        return f'User{self.emal} has been added to the database'
+        return f'User{self.email} has been added to the database'
     
 class Contact(db.Model):
     id = db.Column(db.String, primary_key = True)
@@ -60,7 +60,7 @@ class Contact(db.Model):
 
 
     def __init__(self, name, address, email,phone_number, user_token,id = ''):
-        self_id = self.set_id()
+        self.id = self.set_id()
         self.name = name
         self.email = email
         self.address = address
@@ -76,7 +76,7 @@ class Contact(db.Model):
     
 class ContactSchema(ma.Schema):
     class Meta:
-        ffields = ['id', 'name', 'phone_number, email, address']
+        fields = ['id', 'name', 'phone_number', 'email', 'address']
 
 contact_schema = ContactSchema()
 contacts_schema = ContactSchema(many = True)
