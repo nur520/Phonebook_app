@@ -15,5 +15,5 @@ class Config():
     FLASK_ENV = os.getenv('FLASK_ENV')  
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'anyone will never get access to my CSS' 
      #for the datebaser accese or read path
-    SQLALCHEMY_DATABASE_URL = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir,'app.db')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI') or 'sqlite:///' + os.path.join(basedir,'app.db')
     SQLALCHEMY_TRACK_NOTIFICATION = False  
